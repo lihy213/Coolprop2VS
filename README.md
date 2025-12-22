@@ -2,11 +2,11 @@
 
 This doc describes the steps for facilitate Coolprop package to Visual Studio.
 
-Test ENV: Visual Studio 2019 Community, Windows 10.
+**Test ENV: Visual Studio 2019 Community, Windows 10.**
 
 ## Tools
 
-1. Download and install `VS2019 Community`: [Downloads & Keys - Visual Studio Subscriptions](https://my.visualstudio.com/Downloads?q=visual studio 2019&wt.mc_id=o~msft~vscom~older-downloads)
+1. Download and install `VS2019 Community`: [Downloads & Keys - Visual Studio Subscriptions](https://my.visualstudio.com/Downloads?q=visual\studio\2019&wt.mc_id=o~msft~vscom~older-downloads)
 2. Download `cmake`: [Download CMake](https://cmake.org/download)；[Windows下CMake安装使用_cmake window-CSDN博客](https://blog.csdn.net/finghting321/article/details/105528436)
 
 ## CoolProp Setup
@@ -24,7 +24,7 @@ cmake .. -DCOOLPROP_STATIC_LIBRARY=ON
 cmake --build .
 ```
 
-In line 8, the parameters should correspond to IDE, e.g., for VS2019 is:
+In line 8, the parameters should correspond to IDE, e.g., for VS2019 are:
 
 ```c++
 cmake .. -A x64 -G "Visual Studio 16 2019" -DCOOLPROP_STATIC_LIBRARY=ON
@@ -49,7 +49,7 @@ cmake .. -A x64 -G "Visual Studio 16 2019" -DCOOLPROP_STATIC_LIBRARY=ON
               |-
       ```
 
-      - Add the following information to `CmakeLists.txt`:
+      - Add the following lines to `CmakeLists.txt`:
 
       - ```c++
         # See also http://stackoverflow.com/a/18697099
