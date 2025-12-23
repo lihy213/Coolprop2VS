@@ -90,8 +90,10 @@ https://blog.csdn.net/m0_68216188/article/details/147728598
 DONE.
 
 
-# WAY2-Static Compile
+# WAY2-Static Compilation
 *This tutorial is directly compile CoolProp in Visual Studio through .dll, .lib, and .h.*
+
+Static linking involves embedding DLL references into the executable file during compilation. This method requires the DLL file **(.lib)** and header file** (.h)**. It must include the header file and instruct the compiler via linker directives to link the required library file.
 
 **NOTE:** ENVs are Windows 11 and Visual Studio 2022 Community.
 1. Build a project in VS2022.
@@ -118,6 +120,12 @@ int main() {
 }
 ```
 <img width="433" height="73" alt="图片" src="https://github.com/user-attachments/assets/5d0b6028-e5dd-4f1e-ab2a-6bfa3aa32e29" />
+
+# WAY3-Dynamic Compilation
+
+Dynamic linking involves loading **DLL files** during program execution, obtaining function addresses, and then invoking them. This approach does not require library files but necessitates DLL files and header files. Dynamic linking can be implemented using the Windows API functions LoadLibrary and GetProcAddress.
+
+LoadLibrary is used to load DLL files, while GetProcAddress is used to obtain function addresses. After function invocation, FreeLibrary is used to unload the DLL.
 
 # Star History
 
