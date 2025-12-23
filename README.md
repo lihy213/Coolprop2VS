@@ -1,6 +1,6 @@
 # Coolprop2VS
 
-This doc describes the steps for facilitate Coolprop package to Visual Studio.
+This doc describes the steps for linking Coolprop package to Visual Studio.
 
 **Test ENV: Visual Studio 2019 Community, Windows 10.**
 
