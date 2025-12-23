@@ -35,6 +35,19 @@ For VS2022, are:
 cmake .. -DCOOLPROP_STATIC_LIBRARY=ON -G "Visual Studio 17 2022" -A x64
 ```
 
+**TIPS**
+
+If it occurs problem like  *error C1128: 节数超过对象文件格式限制: 请使用 /bigobj 进行编译* when build line 8, you could try to open ` .vcxproj` in `CoolProp/build` and then find the parameters:
+```c++
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ClCompile>
+    <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+  </ClCompile>
+</ItemDefinitionGroup>
+```
+add ` /bigobj` parameter into it.
+
+
 ## Link to CoolProp
 
 1. Build a project file, here take the `main file` as an example,
