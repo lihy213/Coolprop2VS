@@ -90,7 +90,7 @@ https://blog.csdn.net/m0_68216188/article/details/147728598
 DONE.
 
 
-# WAY2
+# WAY2-Static Compile
 *This tutorial is directly compile CoolProp in Visual Studio through .dll, .lib, and .h.*
 
 **NOTE:** ENVs are Windows 11 and Visual Studio 2022 Community.
