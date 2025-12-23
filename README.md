@@ -24,10 +24,15 @@ cmake .. -DCOOLPROP_STATIC_LIBRARY=ON
 cmake --build .
 ```
 
-In line 8, the parameters should correspond to IDE, e.g., for VS2019 are:
+In line 8, the parameters should match IDE, e.g., for VS2019 are:
 
 ```c++
 cmake .. -A x64 -G "Visual Studio 16 2019" -DCOOLPROP_STATIC_LIBRARY=ON
+```
+For VS2022, are:
+
+```c++
+cmake .. -DCOOLPROP_STATIC_LIBRARY=ON -G "Visual Studio 17 2022" -A x64
 ```
 
 ## Link to CoolProp
