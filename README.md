@@ -88,3 +88,34 @@ https://blog.csdn.net/m0_68216188/article/details/147728598
       - ![image-20251222211801444](./README.assets/image-20251222211801444.png)![image-20251222211805127](./README.assets/image-20251222211805127.png)
 
 DONE.
+
+
+# WAY2
+*This tutorial is directly compile CoolProp in Visual Studio through .dll, .lib, and .h.*
+
+**NOTE:** ENVs are Windows 11 and Visual Studio 2022 Community.
+1. Build a project in VS2022.
+2. Make a file (x64 or x86 which depends on you) in the root directory.
+3. <img width="248" height="226" alt="图片" src="https://github.com/user-attachments/assets/93c75f7c-2806-4b9d-accf-050b7d9dd976" />
+4. Download `CoolProp.dll、CoolProp.lib、CoolPropLib.h`, note that it is 32 bit or 64 bit. https://sourceforge.net/projects/coolprop/files/CoolProp/7.2.0/shared_library/
+5. Put these denpendencies into x64 or x86 file that you made in step 2.
+6. Add the include directory (e.g. `E:\coolproptest\Project1\x64` in my case in step 2) of CoolProp to the list of include directories the `C/C++->General` tab in visual studio.
+7. Add the directory where the .lib file is (e.g. `E:\coolproptest\Project1\x64` in my case in step 2) to the list of library directories in the `Linker->General` tab of the properties.
+8. Add `CoolProp.lib` to the list of .lib files in the `Linker->Input` tab in visual studio.
+
+Finally, build a test case as follows,
+
+```c++
+#define EXPORT_CODE extern "C" __declspec(dllimport)
+#define CONVENTION __stdcall
+#include "CoolPropLib.h"
+#undef EXPORT_CODE
+#undef CONVENTION
+#include <iostream>
+
+int main() {
+	std::cout << PropsSI("T", "P", 101325, "Q", 0, "water") << std::endl;
+}
+```
+<img width="433" height="73" alt="图片" src="https://github.com/user-attachments/assets/5d0b6028-e5dd-4f1e-ab2a-6bfa3aa32e29" />
+
