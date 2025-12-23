@@ -119,3 +119,6 @@ int main() {
 ```
 <img width="433" height="73" alt="图片" src="https://github.com/user-attachments/assets/5d0b6028-e5dd-4f1e-ab2a-6bfa3aa32e29" />
 
+# Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=lihy213/Coolprop2VS&type=date&legend=top-left)](https://www.star-history.com/#lihy213/Coolprop2VS&type=date&legend=top-left)
