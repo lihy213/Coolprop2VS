@@ -190,6 +190,8 @@ int main() {
 }
 ```
 
+<img width="252" height="62" alt="图片" src="https://github.com/user-attachments/assets/d20f9c63-511a-433a-8424-1a3986fb01b3" />
+
 *Note: Some codes are refered to https://www.bilibili.com/opus/1065928634300104722.*
 
 # Star History
