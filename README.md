@@ -47,6 +47,8 @@ If it occurs problem like  *error C1128: 节数超过对象文件格式限制: �
 ```
 add ` /bigobj` parameter into it.
 
+Other possible problems：
+https://blog.csdn.net/m0_68216188/article/details/147728598
 
 ## Link to CoolProp
 
