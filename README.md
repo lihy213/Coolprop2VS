@@ -93,7 +93,7 @@ DONE.
 # WAY2-Static Compilation
 *This tutorial is directly compile CoolProp in Visual Studio through .dll, .lib, and .h.*
 
-Static linking involves embedding DLL references into the executable file during compilation. This method requires the DLL file **(.lib)** and header file** (.h)**. It must include the header file and instruct the compiler via linker directives to link the required library file.
+Static linking involves embedding DLL references into the executable file during compilation. This method requires the DLL file **(.lib)** and header file **(.h)**. It must include the header file and instruct the compiler via linker directives to link the required library file.
 
 **NOTE:** ENVs are Windows 11 and Visual Studio 2022 Community.
 1. Build a project in VS2022.
@@ -126,6 +126,71 @@ int main() {
 Dynamic linking involves loading **DLL files** during program execution, obtaining function addresses, and then invoking them. This approach does not require library files but necessitates DLL files and header files. Dynamic linking can be implemented using the Windows API functions LoadLibrary and GetProcAddress.
 
 LoadLibrary is used to load DLL files, while GetProcAddress is used to obtain function addresses. After function invocation, FreeLibrary is used to unload the DLL.
+
+1. Build a project in VS2022.
+2. Copy `CoolProp.dll` into the root menu or anywhere you could get its route.
+3. There's nothing would be done unless the following codes which calls CoolProp.dll to calculate CO2 properties.
+
+> This method requires function pointers and the WIN32 API functions `LoadLibrary` and `GetProcAddress` (which require the inclusion of windows.h) to be loaded.
+
+Typically, the steps for a Windows program to call a DLL involve three functions: `LoadLibrary(), GetProcAddress(), and FreeLibrary()`.
+- The LoadLibrary() function loads the specified DLL file into the memory of the calling program (DLLs do not have their own memory!).
+- GetProcAddress() retrieves the address of a specific output library function within the DLL for subsequent calls.
+- FreeLibrary() releases the memory allocated by the DLL.
+
+```c++
+#include <windows.h>
+#include<iostream>
+using namespace std;
+
+int main() {
+
+    // Define DLL functions
+    typedef double (WINAPI* Props1SI)(char Refrigerant[20], char PropertyToReturn[20]);
+    typedef double (WINAPI* PropsSI)(char PropertyToReturn[20], char InputProperty1[20], double InputValue1, char InputProperty2[20], double InputValue2, char Refrigerant[20]);
+
+    // addresses
+    Props1SI Props1SIAddress;
+    PropsSI PropsSIAddress;
+    double result1, result2, result3;
+
+    // load DLL; change this path as needed
+    HINSTANCE CoolPropDll = LoadLibraryA("xxx_your_coolprop.dll_route\\CoolProp.dll");
+
+    if (CoolPropDll)
+    {
+        // addresses
+        Props1SIAddress = (Props1SI)GetProcAddress(CoolPropDll, "Props1SI");
+        PropsSIAddress = (PropsSI)GetProcAddress(CoolPropDll, "PropsSI");
+
+        // call function
+        char CO2[20] = "co2";
+        char Tcrit[20] = "Tcrit";
+		char Pcrit[20] = "Pcrit";
+        char Dmass[20] = "Dmass";
+        char T[20] = "T";
+        char P[20] = "P";
+
+        if (Props1SIAddress && PropsSIAddress)
+        {
+            result1 = (*Props1SIAddress) (CO2, Tcrit);
+            printf("CO2 Tcrit: %g\n", result1);
+            result2 = (*PropsSIAddress) (Dmass, T, 304.128, P, 7.377e6, CO2);
+            printf("CO2 density: %g\n", result2);
+            result3 = (*Props1SIAddress) (CO2, Pcrit);
+			printf("CO2 Pcrit: %g\n", result3);
+        }
+        // unload DLL
+        FreeLibrary(CoolPropDll);
+    }
+    else {
+        printf("Could not load CoolProp DLL.");
+    }
+	system("pause");
+}
+```
+
+*Note: Some codes are refered to https://www.bilibili.com/opus/1065928634300104722.*
 
 # Star History
 
